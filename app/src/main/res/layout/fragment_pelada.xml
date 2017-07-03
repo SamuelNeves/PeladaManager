@@ -1,0 +1,141 @@
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 tools:context="ufop.br.futmansamuel.fragments.PeladaFragment">
+
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="9dp"
+            android:text="@string/team_1"
+            android:textSize="@dimen/textForms"
+            app:layout_constraintHorizontal_bias="0.543"
+            app:layout_constraintLeft_toLeftOf="@+id/lstViewTeamOne"
+            app:layout_constraintRight_toRightOf="@+id/lstViewTeamOne"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/team_2"
+            android:textSize="@dimen/textForms"
+            app:layout_constraintHorizontal_bias="0.442"
+            app:layout_constraintLeft_toLeftOf="@+id/lstViewTeamTwo"
+            app:layout_constraintRight_toRightOf="@+id/lstViewTeamTwo"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstViewTeamOne"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstViewTeamTwo"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14"/>
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Substitutes:"
+            app:layout_constraintLeft_toLeftOf="@+id/lstViewTeamOne"
+            app:layout_constraintRight_toRightOf="@+id/lstViewTeamTwo"
+            app:layout_constraintTop_toBottomOf="@+id/lstViewTeamOne"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstViewSubstitutes"
+            android:layout_width="269dp"
+            android:layout_height="112dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"/>
+
+        <Chronometer
+            android:id="@+id/chrono"
+            android:layout_width="252dp"
+            android:layout_height="98dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="0dp"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lstViewSubstitutes"
+            android:layout_marginLeft="24dp"/>
+
+        <Button
+            android:id="@+id/btnPeladaStart"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:shadowColor="@color/colorPrimary"
+            android:text="Start"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lstViewSubstitutes"/>
+
+        <Button
+            android:id="@+id/btnPeladaPause"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:text="Pause"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="@+id/btnPeladaStart"
+            app:layout_constraintRight_toRightOf="@+id/btnPeladaStart"
+            app:layout_constraintTop_toBottomOf="@+id/btnPeladaStart"/>
+
+        <Button
+            android:id="@+id/btnPeladaEnd"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="End Pelada"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFirstRunExit"
+            />
+
+    </android.support.constraint.ConstraintLayout>

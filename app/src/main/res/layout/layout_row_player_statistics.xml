@@ -1,0 +1,140 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?android:selectableItemBackground"
+              android:clickable="true"
+              android:focusable="true"
+              android:foreground="?android:attr/selectableItemBackground"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Nick:"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsNick"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8sp"
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="149dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Tot. Games:"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsPP"
+                android:layout_width="match_parent"
+
+                android:textSize="@dimen/textForms"
+                android:layout_height="match_parent"
+                android:paddingStart="8sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="W.:"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsWins"
+                android:layout_width="50sp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8sp"
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/loses"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsLoses"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8sp"
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/goals"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsGoals"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8sp"
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Winrate:"
+                android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/txtPlayerStatsWinrate"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="8sp"
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

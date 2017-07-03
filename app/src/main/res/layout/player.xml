@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:clickable="true"
+              android:focusable="true"
+              android:foreground="?android:attr/selectableItemBackground"
+              android:background="?android:selectableItemBackground"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/txtListId"
+        android:layout_width="25sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/textForms"
+        android:text="@string/id"/>
+
+    <TextView
+        android:id="@+id/txtListNick"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/textForms"
+        android:text="Nick"/>
+
+    <TextView
+        android:id="@+id/txtListPhone"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Phone"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/txtListNumberOfWins"-->
+        <!--android:layout_width="20sp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+<!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/txtListNumberOfDefeats"-->
+        <!--android:layout_width="20sp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="NumberOfDefeats"/>-->
+
+    <TextView
+        android:id="@+id/txtListWinRate"
+        android:layout_width="20sp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Winrate"/>
+</LinearLayout>

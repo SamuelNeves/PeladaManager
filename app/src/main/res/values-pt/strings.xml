@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Pelada</item>
+        <item>Adicionar Jogador</item>
+        <item>Listar Jogadores</item>
+        <item>Estatisticas</item>
+        <item>COnfigurações</item>
+    </string-array>
+    <string name="app_name">Pelada Manager</string>
+    <string name="cancel">Cancelar</string>
+    <string name="first_name">Primeiro Nome</string>
+    <string name="first_name_player">Primeiro Nome:</string>
+    <string name="hello_blank_fragment"></string>
+    <string name="last_name">Sobrenome</string>
+    <string name="last_name_player">Sobrenome:</string>
+    <string name="lista_de_jogadores">Lista de Jogadores:</string>
+    <string name="nav_about_us">Sobre</string>
+    <string name="nav_home"></string>
+    <string name="nav_players">Jogadores</string>
+    <string name="nav_registrar_jogador">Registrar Jogador</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="nick">Apelido</string>
+    <string name="phone">Telefone:</string>
+    <string name="team_1">Time 1:</string>
+    <string name="team_2">Time 2:</string>
+    <string name="telephone_hint">Telefone:</string>
+    <string name="order_by">Order By:</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="remove_player_team">Remove</string>
+    <string name="goals">Goals:</string>
+    <string name="loses">L.:</string>
+</resources>

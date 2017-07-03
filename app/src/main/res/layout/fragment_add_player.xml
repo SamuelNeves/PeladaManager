@@ -1,0 +1,161 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="20dp"
+              android:paddingRight="20dp"
+              android:paddingTop="30dp"
+              tools:context="ufop.br.futmansamuel.fragments.ListPlayersFragment"
+              android:weightSum="1">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="351dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddId"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:ems="4"
+            android:hint="@string/hint_id"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddFirstName"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:ems="12"
+
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"/>
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddLastName"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:ems="12"
+
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddNick"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:ems="12"
+
+            android:hint="Nick"
+            android:inputType="textPersonName"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddEmail"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="Email"
+            android:ems="12"
+
+            android:inputType="textEmailAddress"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/txtAddTelephone"
+            android:hint="@string/telephone_hint"
+            android:ems="12"
+
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="phone"
+            app:layout_constraintLeft_toRightOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddEmail"
+            />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"
+        app:layout_constraintVertical_bias="0.493">
+
+        <Button
+            android:id="@+id/btnAddSubmit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="159dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="7dp"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"
+            app:layout_constraintVertical_bias="0.494"/>
+
+        <Button
+            android:id="@+id/btnAddCancel"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="159dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="7dp"
+            android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/txtAddSubmit"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"/>
+    </LinearLayout>
+</LinearLayout>

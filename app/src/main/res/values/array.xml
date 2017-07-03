@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="duration_of_pelada">
+        <item>5 min.</item>
+        <item>6 min.</item>
+        <item>7 min.</item>
+        <item>8 min.</item>
+        <item>9 min.</item>
+        <item>10 min.</item>
+    </string-array>
+    <string-array name="number_players_team">
+        <item>5 players</item>
+        <item>6 players</item>
+        <item>7 players</item>
+    </string-array>
+
+
+</resources>

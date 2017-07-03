@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_add_player"
+            android:icon="@drawable/ic_register_player"
+            android:title="@string/nav_registrar_jogador" />
+        <item
+            android:id="@+id/nav_list_players"
+            android:icon="@drawable/ic_players"
+            android:title="@string/nav_players" />
+
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@mipmap/ic_stats"
+            android:title="@string/nav_notifications" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_settings" />
+    </group>
+
+    <item android:title="@string/statistics">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:title="@string/nav_about_us" />
+            <item
+                android:id="@+id/nav_privacy_policy"
+                android:title="@string/privacy_policy" />
+        </menu>
+    </item>
+
+</menu>
