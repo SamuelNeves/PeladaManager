@@ -53,7 +53,7 @@ public class ReciclerPlayerAdapter extends RecyclerView.Adapter<ReciclerPlayerAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Log.d("RECI",""+ players.get(position).toString());
         holder.txtId.setText(players.get(position).getId().toString());
-        holder.txtNick.setText(players.get(position).getFullName());
+        holder.txtNick.setText(players.get(position).getNickName());
         holder.txtPhone.setText(players.get(position).getPhone().toString());
 //        txtNumberOfWins.setText(String.valueOf(player.getNumberOfWins()));
 //        txtNumberOfDefeats.setText(String.valueOf(player.getNumberOfDefeats()));
