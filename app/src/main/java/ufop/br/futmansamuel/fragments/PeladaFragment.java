@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ufop.br.futmansamuel.R;
@@ -35,16 +36,18 @@ public class PeladaFragment extends Fragment {
     RecyclerView lstTeamOne;
     RecyclerView lstTeamTwo;
     RecyclerView lstSubs;
-
+    TextView txtPlacar;
     Chronometer crono;
-    Button btnStart, btnPause, btnEndGame;
+    Button btnStart, btnPause, btnReset;
     android.support.v7.app.AlertDialog aDMenu;
     PeladaManager peladaManager;
     MediaPlayer mp;
+
+    private int winnerTeam=0;
     private long elapsedTime;
     private boolean isRunningChronometer = false;
     private boolean alarmElapsed = false;
-    final String[] itemMenuDialogTeam = {"Add Goal", "Remove"};
+    final String[] itemMenuDialogTeam = {"Add Goal", "Substituir", "Remove"};
     final String[] itemMenuDialogSubs = {"Add to Team 1", "Add to Team 2"};
 
     //    final String[] itemMenuDialog = {
@@ -80,11 +83,12 @@ public class PeladaFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
 //                Toast.makeText(getActivity().getApplicationContext(), MainActivity.players.get(position) + " is selected!", Toast.LENGTH_SHORT).show();
-                showMenuDialogTeam(view, position,1);
+                showMenuDialogTeam(view, position, 1);
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                showMenuDialogTeam(view, position, 1);
             }
         }));
 
@@ -97,11 +101,12 @@ public class PeladaFragment extends Fragment {
         lstTeamTwo.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), lstTeamTwo, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                showMenuDialogTeam(view, position,2);
+                showMenuDialogTeam(view, position, 2);
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                showMenuDialogTeam(view, position, 2);
             }
         }));
 
@@ -114,22 +119,18 @@ public class PeladaFragment extends Fragment {
         lstSubs.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), lstSubs, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                    showMenuDialogSubs(view, position);
+                showMenuDialogSubs(view, position);
             }
 
             @Override
             public void onLongClick(View view, int position) {
-
+                showMenuDialogSubs(view, position);
 
             }
         }));
 
     }
 
-    private void refreshMenu() {
-        MainActivity.actualFragment = MainActivity.STATE_PELADA_FRAGMENT;
-        getActivity().invalidateOptionsMenu();
-    }
 
     private void initMediaPlayer() {
         try {
@@ -145,7 +146,8 @@ public class PeladaFragment extends Fragment {
         crono = (Chronometer) v.findViewById(R.id.chrono);
         btnStart = (Button) v.findViewById(R.id.btnPeladaStart);
         btnPause = (Button) v.findViewById(R.id.btnPeladaPause);
-        btnEndGame = (Button) v.findViewById(R.id.btnPeladaEnd);
+        btnReset = (Button) v.findViewById(R.id.btnPeladaReset);
+        txtPlacar= (TextView)v.findViewById(R.id.txtPlacarPelada);
         initListernerOfButtons();
         initListernerOfChronometer(peladaManager.getMaxDurationOfPelada());
     }
@@ -158,6 +160,7 @@ public class PeladaFragment extends Fragment {
                     alarmElapsed = true;
                     pauseChronometer();
                     mp.start();
+                    endGame();
                 }
             }
         });
@@ -188,14 +191,32 @@ public class PeladaFragment extends Fragment {
             }
         });
 
-        btnEndGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEndDialog();
-            }
-        });
     }
 
+    private void refreshMenu() {
+        MainActivity.actualFragment = MainActivity.STATE_PELADA_FRAGMENT;
+        getActivity().invalidateOptionsMenu();
+    }
+
+    private void addGoalClicked(int team,int position){
+        if (team == 1) {
+            peladaManager.getPelada().getTeam1().addGoal();
+            peladaManager.getPelada().getTeam1().getPlayers().get(position).addGoal();
+            Toast.makeText(getActivity().getApplicationContext(), ""+
+                    peladaManager.getPelada().getTeam1().getPlayers().get(position).getNumberOfGoalsInGame()
+                    +peladaManager.getPelada().getTeam1().getPlayers().get(position).getNickName(), Toast.LENGTH_SHORT).show();
+        } else {
+            peladaManager.getPelada().getTeam2().addGoal();
+            peladaManager.getPelada().getTeam2().getPlayers().get(position).addGoal();
+        }
+        updateScore();
+
+    }
+
+    private void updateScore() {
+        txtPlacar.setText(peladaManager.getPelada().getTeam1().getNumberOfGoals()+"X"+peladaManager.getPelada().getTeam2().getNumberOfGoals());
+
+    }
 
     private void showMenuDialogTeam(View v, final int positionOfSelectedItem, final int team) {
         aDMenu = new android.support.v7.app.AlertDialog.Builder(getActivity())
@@ -206,10 +227,12 @@ public class PeladaFragment extends Fragment {
 
                         switch (position) {
                             case 0:
-//                                TODO
+                                addGoalClicked(team,position);
                                 break;
                             case 1:
-                               removePlayerFromTeam(team,positionOfSelectedItem);
+                                break;
+                            case 2:
+                                removePlayerFromTeam(team, positionOfSelectedItem);
                                 break;
 
                         }
@@ -236,7 +259,7 @@ public class PeladaFragment extends Fragment {
 
                         switch (position) {
                             case 0:
-//                                TODO
+
                                 break;
                             case 1:
                                 break;
@@ -269,38 +292,56 @@ public class PeladaFragment extends Fragment {
     }
 
     private void removePlayerFromTeam(int team, int position) {
-        PlayerInPelada playerToEnter=peladaManager.getPelada().getSubstitutes().getPlayers().remove(0);
+        PlayerInPelada playerToEnter = peladaManager.getPelada().getSubstitutes().getPlayers().remove(0);
         if (team == 1) {
-            PlayerInPelada playerToExit =peladaManager.getPelada().getTeam1().getPlayers().remove(position);
+            PlayerInPelada playerToExit = peladaManager.getPelada().getTeam1().getPlayers().remove(position);
             peladaManager.getPelada().getTeam1().getPlayers().add(playerToEnter);
             peladaManager.getPelada().getSubstitutes().getPlayers().add(playerToExit);
             mAdapter1.notifyDataSetChanged();
         } else {
-            PlayerInPelada playerToExit =peladaManager.getPelada().getTeam2().getPlayers().remove(position);
+            PlayerInPelada playerToExit = peladaManager.getPelada().getTeam2().getPlayers().remove(position);
             peladaManager.getPelada().getTeam2().getPlayers().add(playerToEnter);
             peladaManager.getPelada().getSubstitutes().getPlayers().add(playerToExit);
             mAdapter2.notifyDataSetChanged();
         }
-            mAdapterSubs.notifyDataSetChanged();
+        mAdapterSubs.notifyDataSetChanged();
     }
 
+
+    private void endGame(){
+        if(peladaManager.getPelada().getTeam1().getNumberOfGoals()>peladaManager.getPelada().getTeam2().getNumberOfGoals()){
+            winnerTeam=1;
+        }else{
+            winnerTeam=2;
+        }
+        showEndDialog();
+
+    }
     private void showEndDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("End Pelada")
-                .setMessage("Do you really want to end this pelada?")
-                .setPositiveButton("End",
+//                .setTitle("End Pelada")
+                .setMessage("O time Vencedor foi o time " +winnerTeam+"?")
+                .setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
+
+                                peladaManager.endPelada(winnerTeam);
                                 StatisticsAtEndOfPelada f = new StatisticsAtEndOfPelada();
                                 MainActivity.transitionToNewFragment(f, getActivity());
                             }
 
                         })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
+                        if(winnerTeam==1){
+                            winnerTeam=2;
+                        }else if(winnerTeam==2){
+                            winnerTeam=1;
+                        }
+                        peladaManager.endPelada(winnerTeam);
+
                     }
                 })
                 .create();

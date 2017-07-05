@@ -284,11 +284,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         drawer.closeDrawers();
                         return true;
-                    case R.id.nav_privacy_policy:
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(MainActivity.this, PrivacyPolicyActivity.class));
-                        drawer.closeDrawers();
-                        return true;
                     default:
                         navItemIndex = 0;
                 }
@@ -357,8 +352,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (actualFragment == STATE_CHECK_PRESENCE_FRAGMENT) {
             getMenuInflater().inflate(R.menu.order_menu, menu);
-            } else {
-        }
+            }
+//            else if(actualFragment ==STATE_PELADA_FRAGMENT){
+//            getMenuInflater().inflate(R.menu.pelada_menu, menu);
+
+//        }
 
         return true;
 
@@ -371,15 +369,15 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         
+        if(id== R.id.menu_pelada_end){
 
+        }
         if(id== R.id.order_by_presence){
             orderByPresence();
 
         }
         if(id==R.id.order_by_nick){
             orderByNick();
-
-
         }
         return super.onOptionsItemSelected(item);
 
@@ -446,6 +444,33 @@ public class MainActivity extends AppCompatActivity {
             players = new ArrayList<>();
         }
 
+        players=new ArrayList<>();
+        players.add(new Players("1","Teste1","Teste1","Teste1","Teste1",0,0));
+        players.add(new Players("2","Teste2","Teste2","Teste2","Teste2",0,0));
+        players.add(new Players("3","Teste3","Teste3","Teste3","Teste3",0,0));
+        players.add(new Players("4","Teste4","Teste4","Teste4","Teste4",0,0));
+        players.add(new Players("5","Teste5","Teste5","Teste5","Teste5",0,0));
+        players.add(new Players("6","Teste6","Teste6","Teste6","Teste6",0,0));
+        players.add(new Players("7","Teste7","Teste7","Teste7","Teste7",0,0));
+        players.add(new Players("8","Teste8","Teste8","Teste8","Teste8",0,0));
+        players.add(new Players("9","Teste9","Teste9","Teste9","Teste9",0,0));
+        players.add(new Players("10","Teste10","Teste10","Teste10","Teste10",0,0));
+        players.add(new Players("11","Teste11","Teste11","Teste11","Teste11",0,0));
+        players.add(new Players("12","Teste12","Teste12","Teste12","Teste12",0,0));
+        players.add(new Players("13","Teste13","Teste13","Teste13","Teste13",0,0));
+        players.add(new Players("14","Teste14","Teste14","Teste14","Teste14",0,0));
+        players.add(new Players("15","Teste15","Teste15","Teste15","Teste15",0,0));
+        players.add(new Players("16","Teste16","Teste16","Teste16","Teste16",0,0));
+        players.add(new Players("17","Teste17","Teste17","Teste17","Teste17",0,0));
+        players.add(new Players("18","Teste18","Teste18","Teste18","Teste18",0,0));
+        players.add(new Players("19","Teste19","Teste19","Teste19","Teste19",0,0));
+        players.add(new Players("20","Teste20","Teste20","Teste20","Teste20",0,0));
+        players.add(new Players("21","Teste21","Teste21","Teste21","Teste21",0,0));
+        players.add(new Players("22","Teste22","Teste22","Teste22","Teste22",0,0));
+        players.add(new Players("23","Teste23","Teste23","Teste23","Teste23",0,0));
+        players.add(new Players("24","Teste24","Teste24","Teste24","Teste24",0,0));
+        players.add(new Players("25","Teste25","Teste25","Teste25","Teste25",0,0));
+        players.add(new Players("26","Teste26","Teste26","Teste26","Teste26",0,0));
 
     }
 

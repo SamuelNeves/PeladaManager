@@ -29,6 +29,10 @@ public class PlayerInPelada extends Players {
         this.presentInPelada = presentInPelada;
     }
 
+    public void addGoal(){
+        this.numberOfGoalsInGame++;
+
+    }
     public int getNumberOfGoalsInGame() {
         return numberOfGoalsInGame;
     }

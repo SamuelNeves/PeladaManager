@@ -1,14 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingLeft="20dp"
-              android:paddingRight="20dp"
-              android:paddingTop="30dp"
-              android:weightSum="1"
-              tools:context="ufop.br.futmansamuel.fragments.ListPlayersFragment">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="ufop.br.futmansamuel.fragments.EditPlayerFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,10 +13,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tilId">
+            android:id="@+id/tilIdEdit">
 
             <EditText
-                android:id="@+id/txtAddId"
+                android:id="@+id/txtEditId"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,12 +26,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilFirstNameEdit"
             android:layout_width="wrap_content"
-            android:id="@+id/tilFirstName"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtAddFirstName"
+                android:id="@+id/txtEditFirstName"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,12 +44,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilLastNameEdit"
             android:layout_width="wrap_content"
-            android:id="@+id/tilLastName"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtAddLastName"
+                android:id="@+id/txtEditLastName"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,12 +62,12 @@
 
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilNickEdit"
             android:layout_width="wrap_content"
-            android:id="@+id/tilNick"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtAddNick"
+                android:id="@+id/txtEditNick"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,12 +82,12 @@
 
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilEmailEdit"
             android:layout_width="wrap_content"
-            android:id="@+id/tilEmail"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtAddEmail"
+                android:id="@+id/txtEditEmail"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,20 +101,19 @@
 
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPhoneEdit"
             android:layout_width="wrap_content"
-            android:id="@+id/tilPhone"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtAddTelephone"
+                android:id="@+id/txtEditTelephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:ems="12"
                 android:hint="@string/telephone_hint"
                 android:inputType="phone"
-                app:layout_constraintLeft_toRightOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/txtAddEmail"
+
                 />
 
 
@@ -132,37 +125,27 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"
-            app:layout_constraintVertical_bias="0.493">
+            >
 
             <Button
-                android:id="@+id/btnAddSubmit"
+                android:id="@+id/btnEditSubmit"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="159dp"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="7dp"
                 android:text="@string/submit"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"
-                app:layout_constraintVertical_bias="0.494"/>
+                />
 
             <Button
-                android:id="@+id/btnAddCancel"
+                android:id="@+id/btnEditCancel"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="159dp"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="7dp"
                 android:text="@string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/txtAddSubmit"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtAddTelephone"/>
+              />
         </LinearLayout>
     </LinearLayout>
 

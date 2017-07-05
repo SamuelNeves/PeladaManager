@@ -9,8 +9,13 @@ import ufop.br.futmansamuel.other.DividerItemDecoration;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +32,6 @@ import android.widget.Toast;
 
 public class ListPlayersFragment extends Fragment {
 
-    ListView lstPlayers;
     AlertDialog aDMenu;
     private RecyclerView recyclerView;
     private ReciclerPlayerAdapter mAdapter;
@@ -84,10 +88,11 @@ public class ListPlayersFragment extends Fragment {
 
                         switch (position) {
                             case 0:
-//                                TODO
+                                String phoneNumber= MainActivity.players.get(positionOfSelectedItem).getPhone();
+                                openWhatsAppActivity(phoneNumber);
                                 break;
                             case 1:
-//                                TODO
+                                    openEditFragment(positionOfSelectedItem);
                                 break;
                             case 2:
                                 showAlertDialog(positionOfSelectedItem);
@@ -104,6 +109,24 @@ public class ListPlayersFragment extends Fragment {
         wmlp.gravity = Gravity.TOP;
         wmlp.y = (int) v.getY();
         aDMenu.show();
+    }
+
+    private void openEditFragment(int positionToEdit) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        EditPlayerFragment fragment = EditPlayerFragment.newInstance(positionToEdit);
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
+
+    }
+
+    private void openWhatsAppActivity(String phoneNumber) {
+
+        Uri uri = Uri.parse("smsto:" + phoneNumber);
+        Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+        i.setPackage("com.whatsapp");
+        startActivity(Intent.createChooser(i, ""));
     }
 
     private void showAlertDialog(final int positionToRemove) {
@@ -135,6 +158,7 @@ public class ListPlayersFragment extends Fragment {
                         ).create();
         alertDialog.show();
     }
+
 
 }
 

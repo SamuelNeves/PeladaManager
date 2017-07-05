@@ -10,6 +10,10 @@ import java.io.Serializable;
 public class Players implements Serializable{
 
 
+    public void setNumberOfGoals(int numberOfGoals) {
+        this.numberOfGoals = numberOfGoals;
+    }
+
     private  int numberOfGoals;
     private String id;
     private String firstName;

@@ -8,6 +8,17 @@ import java.util.ArrayList;
 
 public class Team {
 
+    public int getNumberOfGoals() {
+        return numberOfGoals;
+    }
+    public void addGoal(){
+        this.numberOfGoals++;
+    }
+    public void setNumberOfGoals(int numberOfGoals) {
+        this.numberOfGoals = numberOfGoals;
+    }
+
+    private int numberOfGoals=0;
     private ArrayList<PlayerInPelada> players;
 
     public Team() {
