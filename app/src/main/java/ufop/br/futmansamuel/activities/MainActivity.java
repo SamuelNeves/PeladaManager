@@ -22,8 +22,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amitshekhar.DebugDB;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.stetho.Stetho;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupSharedPreferences();
-        Log.d("firstRun", sharedPreferences.getBoolean("firstRun", true) + "");
+        Log.d("firstRun", " "+sharedPreferences.getBoolean("firstRun", true) + "");
         if (sharedPreferences.getBoolean("firstRun", true)) {
             executeOnFirstRun();
         }

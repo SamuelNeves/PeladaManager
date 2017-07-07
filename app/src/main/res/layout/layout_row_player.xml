@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="@string/id"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="15sp"/>
@@ -30,12 +30,13 @@
                 android:id="@+id/txtListId"
                 android:layout_width="186dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
                 android:paddingStart="8sp"
                 android:textSize="@dimen/textForms"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="161dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -43,16 +44,17 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="Phone:"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/txtListPhone"
-                android:layout_width="80sp"
-
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="8sp"/>
+                android:gravity="center_vertical|center_horizontal"
+                android:paddingStart="8sp"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -69,7 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="Nick:"
                 android:textColor="@android:color/darker_gray"/>
 
@@ -78,29 +80,30 @@
                 android:layout_width="170dp"
 
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
                 android:paddingStart="8sp"
                 android:textSize="@dimen/textForms"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="Winrate:"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
                 android:id="@+id/txtListWinRate"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="@dimen/textForms"
                 android:paddingStart="8sp"
-                android:layout_width="wrap_content"/>
-            </LinearLayout>
+                android:textSize="@dimen/textForms"/>
+        </LinearLayout>
         </LinearLayout>
 </LinearLayout>

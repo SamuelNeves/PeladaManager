@@ -2,18 +2,16 @@ package ufop.br.futmansamuel.sort;
 
 import java.util.Comparator;
 
-import ufop.br.futmansamuel.other.PlayerInPelada;
 import ufop.br.futmansamuel.other.Players;
 
 /**
  * @author Samuel Neves
- *         Created on 01/07/17.
+ *         Created on 07/07/17.
  */
 
-public class OrderByPresence implements Comparator<PlayerInPelada> {
-
+public class OrderByGoals implements Comparator<Players> {
     @Override
-    public int compare(PlayerInPelada o1, PlayerInPelada o2) {
+    public int compare(Players o1, Players o2) {
         return o1.getNumberOfGoals()-o2.getNumberOfGoals();
     }
 }

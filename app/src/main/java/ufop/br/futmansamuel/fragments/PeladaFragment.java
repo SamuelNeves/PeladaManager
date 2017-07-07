@@ -43,7 +43,7 @@ public class PeladaFragment extends Fragment {
     PeladaManager peladaManager;
     MediaPlayer mp;
 
-    private int winnerTeam=0;
+    private int winnerTeam = 0;
     private long elapsedTime;
     private boolean isRunningChronometer = false;
     private boolean alarmElapsed = false;
@@ -147,7 +147,7 @@ public class PeladaFragment extends Fragment {
         btnStart = (Button) v.findViewById(R.id.btnPeladaStart);
         btnPause = (Button) v.findViewById(R.id.btnPeladaPause);
         btnReset = (Button) v.findViewById(R.id.btnPeladaReset);
-        txtPlacar= (TextView)v.findViewById(R.id.txtPlacarPelada);
+        txtPlacar = (TextView) v.findViewById(R.id.txtPlacarPelada);
         initListernerOfButtons();
         initListernerOfChronometer(peladaManager.getMaxDurationOfPelada());
     }
@@ -198,13 +198,13 @@ public class PeladaFragment extends Fragment {
         getActivity().invalidateOptionsMenu();
     }
 
-    private void addGoalClicked(int team,int position){
+    private void addGoalClicked(int team, int position) {
         if (team == 1) {
             peladaManager.getPelada().getTeam1().addGoal();
             peladaManager.getPelada().getTeam1().getPlayers().get(position).addGoal();
-            Toast.makeText(getActivity().getApplicationContext(), ""+
+            Toast.makeText(getActivity().getApplicationContext(), "" +
                     peladaManager.getPelada().getTeam1().getPlayers().get(position).getNumberOfGoalsInGame()
-                    +peladaManager.getPelada().getTeam1().getPlayers().get(position).getNickName(), Toast.LENGTH_SHORT).show();
+                    + peladaManager.getPelada().getTeam1().getPlayers().get(position).getNickName(), Toast.LENGTH_SHORT).show();
         } else {
             peladaManager.getPelada().getTeam2().addGoal();
             peladaManager.getPelada().getTeam2().getPlayers().get(position).addGoal();
@@ -214,7 +214,7 @@ public class PeladaFragment extends Fragment {
     }
 
     private void updateScore() {
-        txtPlacar.setText(peladaManager.getPelada().getTeam1().getNumberOfGoals()+"X"+peladaManager.getPelada().getTeam2().getNumberOfGoals());
+        txtPlacar.setText(peladaManager.getPelada().getTeam1().getNumberOfGoals() + "X" + peladaManager.getPelada().getTeam2().getNumberOfGoals());
 
     }
 
@@ -227,9 +227,10 @@ public class PeladaFragment extends Fragment {
 
                         switch (position) {
                             case 0:
-                                addGoalClicked(team,position);
+                                addGoalClicked(team, positionOfSelectedItem);
                                 break;
                             case 1:
+                                substituirPlayer(team, positionOfSelectedItem);
                                 break;
                             case 2:
                                 removePlayerFromTeam(team, positionOfSelectedItem);
@@ -249,6 +250,22 @@ public class PeladaFragment extends Fragment {
         aDMenu.show();
     }
 
+    private void substituirPlayer(int team, int positionOfSelectedItem) {
+        PlayerInPelada p;
+
+        if (team == 1) {
+            p = peladaManager.getPelada().getTeam1().getPlayers().remove(positionOfSelectedItem);
+            peladaManager.getPelada().getSubstitutes().getPlayers().add(p);
+            mAdapter1.notifyItemRemoved(positionOfSelectedItem);
+        } else {
+            p = peladaManager.getPelada().getTeam2().getPlayers().remove(positionOfSelectedItem);
+            peladaManager.getPelada().getSubstitutes().getPlayers().add(p);
+            mAdapter2.notifyItemRemoved(positionOfSelectedItem);
+        }
+        mAdapterSubs.notifyDataSetChanged();
+
+    }
+
 
     private void showMenuDialogSubs(View v, final int positionOfSelectedItem) {
         aDMenu = new android.support.v7.app.AlertDialog.Builder(getActivity())
@@ -259,14 +276,31 @@ public class PeladaFragment extends Fragment {
 
                         switch (position) {
                             case 0:
-
+                                if (peladaManager.isTeam1Full()) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Time Completo", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    PlayerInPelada p = peladaManager.getPelada().getSubstitutes().getPlayers().remove(positionOfSelectedItem);
+                                    peladaManager.getPelada().getTeam1().getPlayers().add(p);
+                                    mAdapter1.notifyDataSetChanged();
+                                    mAdapterSubs.notifyDataSetChanged();
+                                }
                                 break;
                             case 1:
+                                if (peladaManager.isTeam2Full()) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Time Completo", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    PlayerInPelada p = peladaManager.getPelada().getSubstitutes().getPlayers().remove(positionOfSelectedItem);
+                                    peladaManager.getPelada().getTeam2().getPlayers().add(p);
+                                    mAdapter2.notifyDataSetChanged();
+                                    mAdapterSubs.notifyDataSetChanged();
+
+                                }
+
                                 break;
 
                         }
 
-                        String item = itemMenuDialogTeam[position];
+                        String item = itemMenuDialogSubs[position];
                         Toast.makeText(getActivity().getApplicationContext(), "" + item, Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -308,26 +342,29 @@ public class PeladaFragment extends Fragment {
     }
 
 
-    private void endGame(){
-        if(peladaManager.getPelada().getTeam1().getNumberOfGoals()>peladaManager.getPelada().getTeam2().getNumberOfGoals()){
-            winnerTeam=1;
-        }else{
-            winnerTeam=2;
+    private void endGame() {
+        if (peladaManager.getPelada().getTeam1().getNumberOfGoals() > peladaManager.getPelada().getTeam2().getNumberOfGoals()) {
+            winnerTeam = 1;
+        } else {
+            winnerTeam = 2;
         }
         showEndDialog();
 
     }
+
     private void showEndDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 //                .setTitle("End Pelada")
-                .setMessage("O time Vencedor foi o time " +winnerTeam+"?")
+                .setMessage("O time Vencedor foi o time " + winnerTeam + "?")
                 .setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
 
                                 peladaManager.endPelada(winnerTeam);
-                                StatisticsAtEndOfPelada f = new StatisticsAtEndOfPelada();
+                                MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
+                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                PeladaFragment f = new PeladaFragment();
                                 MainActivity.transitionToNewFragment(f, getActivity());
                             }
 
@@ -335,13 +372,16 @@ public class PeladaFragment extends Fragment {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(winnerTeam==1){
-                            winnerTeam=2;
-                        }else if(winnerTeam==2){
-                            winnerTeam=1;
+                        if (winnerTeam == 1) {
+                            winnerTeam = 2;
+                        } else if (winnerTeam == 2) {
+                            winnerTeam = 1;
                         }
                         peladaManager.endPelada(winnerTeam);
-
+                        MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
+                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                        PeladaFragment f = new PeladaFragment();
+                        MainActivity.transitionToNewFragment(f, getActivity());
                     }
                 })
                 .create();
