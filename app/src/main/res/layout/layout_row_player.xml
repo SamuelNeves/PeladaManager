@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Phone:"
+                android:text="@string/phone"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Winrate:"
+                android:text="@string/winrate"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView

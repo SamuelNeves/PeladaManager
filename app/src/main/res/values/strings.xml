@@ -8,9 +8,7 @@
 
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home" translatable="false">Home</string>
-    <string name="nav_photos">Photos</string>
     <string name="nav_players">Players</string>
-    <string name="nav_notifications">Statistics</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_about_us">About</string>
 
@@ -36,8 +34,8 @@
     <string name="last_name_player">Last Name:</string>
     <string name="register_of_player">Register of player</string>
     <string name="id">Id:</string>
-    <string name="phone">Telephone:</string>
-    <string name="email" translatable="false">Email:</string>
+    <string name="phone">Phone:</string>
+    <string name="email" translatable="false">Email</string>
     <string name="telephone_hint">Telephone</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
@@ -58,7 +56,7 @@
     <string name="add_goal">Add Goal</string>
     <string name="remove_player_team">Remove</string>
     <string name="goals">Goals:</string>
-    <string name="loses">L.:</string>
+    <string name="loses" translatable="false">L.:</string>
     <string name="end_pelada">End Pelada</string>
     <string name="order_by_defeats">Order By Defeats</string>
     <string name="order_by_nick">Order By Nick</string>
@@ -67,8 +65,19 @@
     <string name="order_by_wins">Order By Wins</string>
     <string name="about_text">Este trabalho foi desenvolvido no decorer da disciplina CSIXXX- Computação Movel, no intuito de colocar em prática os conceitos teóricos aprendidos em sala de aula.</string>
     <string name="exit">Exit</string>
-    <string name="login">Login</string>
+    <string name="login" translatable="false">Login</string>
     <string name="please_insert_your_email">Please insert your email:</string>
     <string name="welcome_to_the_app_pelada_manager">Welcome to the App Pelada Manager</string>
     <string name="please_insert_your_name">Please insert your name:</string>
+    <string name="order_by_presence">Order By Presence</string>
+    <string name="substitutes">Substitutes:</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="pelada_settings">Pelada Settings</string>
+    <string name="select_the_duration_of_the_match">Select the duration of the match:</string>
+    <string name="number_of_players_in_each_team">Number of players in each team:</string>
+    <string name="winrate" translatable="false">Winrate:</string>
+    <string name="tot_games">Tot. Games:</string>
+    <string name="w" translatable="false">W.:</string>
 </resources>

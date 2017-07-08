@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="@dimen/textForms"
-        android:text="Nick"/>
+        android:text="@string/nick"/>
 
     <TextView
         android:id="@+id/txtListPhone"
         android:layout_width="80sp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Phone"/>
+        android:text="@string/phone"/>
 
     <!--<TextView-->
         <!--android:id="@+id/txtListNumberOfWins"-->
@@ -51,5 +51,5 @@
         android:layout_width="20sp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Winrate"/>
+        android:text="@string/winrate"/>
 </LinearLayout>

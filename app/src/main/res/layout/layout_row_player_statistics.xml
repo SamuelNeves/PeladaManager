@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Nick:"
+                android:text="@string/nick"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Tot. Games:"
+                android:text="@string/tot_games"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="W.:"
+                android:text="@string/w"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Winrate:"
+                android:text="@string/winrate"
                 android:textColor="@android:color/darker_gray"/>
 
             <TextView

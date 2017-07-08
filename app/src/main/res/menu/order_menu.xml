@@ -5,13 +5,13 @@
 
     <item
         android:id="@+id/order_by_nick"
-        android:title="Order By Nick"
+        android:title="@string/order_by_nick"
 
         support:showAsAction="never"/>
 
     <item
         android:id="@+id/order_by_presence"
-        android:title="Order By Presence"
+        android:title="@string/order_by_presence"
 
         support:showAsAction="never"/>
 
