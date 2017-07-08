@@ -2,16 +2,12 @@ package ufop.br.futmansamuel.fragments;
 
 import ufop.br.futmansamuel.R;
 import ufop.br.futmansamuel.activities.MainActivity;
-import ufop.br.futmansamuel.adapters.PlayerAdapter;
 import ufop.br.futmansamuel.adapters.ReciclerPlayerAdapter;
 import ufop.br.futmansamuel.listeners.RecyclerTouchListener;
 import ufop.br.futmansamuel.other.DividerItemDecoration;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,15 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 
 public class ListPlayersFragment extends Fragment {
 
     AlertDialog aDMenu;
-    private RecyclerView recyclerView;
     private ReciclerPlayerAdapter mAdapter;
     final String[] itemMenuDialog = {
             "Contact", "Edit", "Remove"};
@@ -53,7 +46,7 @@ public class ListPlayersFragment extends Fragment {
     }
 
     private void initRecyclerView(View v) {
-        recyclerView = (RecyclerView) v.findViewById(R.id.lstPlayers);
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.lstPlayers);
         mAdapter = new ReciclerPlayerAdapter(MainActivity.players);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -105,6 +98,7 @@ public class ListPlayersFragment extends Fragment {
                     }
                 })
                 .create();
+
         WindowManager.LayoutParams wmlp = aDMenu.getWindow().getAttributes();
         wmlp.gravity = Gravity.TOP;
         wmlp.y = (int) v.getY();

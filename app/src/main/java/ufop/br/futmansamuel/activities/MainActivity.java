@@ -40,10 +40,20 @@ import ufop.br.futmansamuel.other.CircleTransform;
 import ufop.br.futmansamuel.fragments.*;
 import ufop.br.futmansamuel.other.PeladaManager;
 import ufop.br.futmansamuel.other.Players;
+import ufop.br.futmansamuel.sort.OrderByDefeats;
+import ufop.br.futmansamuel.sort.OrderByDefeatsInv;
+import ufop.br.futmansamuel.sort.OrderByGoals;
+import ufop.br.futmansamuel.sort.OrderByGoalsInv;
 import ufop.br.futmansamuel.sort.OrderByNick;
 import ufop.br.futmansamuel.sort.OrderByNickInv;
+import ufop.br.futmansamuel.sort.OrderByNickStat;
+import ufop.br.futmansamuel.sort.OrderByNickStatInv;
 import ufop.br.futmansamuel.sort.OrderByPresence;
 import ufop.br.futmansamuel.sort.OrderByPresenceInv;
+import ufop.br.futmansamuel.sort.OrderByWinRate;
+import ufop.br.futmansamuel.sort.OrderByWinRateInv;
+import ufop.br.futmansamuel.sort.OrderByWins;
+import ufop.br.futmansamuel.sort.OrderByWinsInv;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -355,10 +365,10 @@ public class MainActivity extends AppCompatActivity {
         if (actualFragment == STATE_CHECK_PRESENCE_FRAGMENT) {
             getMenuInflater().inflate(R.menu.order_menu, menu);
             }
-//            else if(actualFragment ==STATE_PELADA_FRAGMENT){
-//            getMenuInflater().inflate(R.menu.pelada_menu, menu);
+            else if(actualFragment ==STATE_STATISTICS_FRAGMENT){
+            getMenuInflater().inflate(R.menu.menu_statistics_order, menu);
 
-//        }
+        }
 
         return true;
 
@@ -370,30 +380,105 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        
-        if(id== R.id.menu_pelada_end){
-
-        }
-        if(id== R.id.order_by_presence){
-            orderByPresence();
-
-        }
-        if(id==R.id.order_by_nick){
-            orderByNick();
+        switch (id) {
+            case R.id.order_by_presence:
+                orderByPresence();
+                break;
+            case R.id.order_by_nick:
+                orderByNick();
+                break;
+            case R.id.order_by_nick_stat:
+                orderByNickStats();
+                break;
+            case R.id.order_by_defeats_stat:
+                orderByDefeats();
+                break;
+            case R.id.order_by_goals_stat:
+                orderByGoals();
+                break;
+            case R.id.order_by_winrate_stat:
+                orderByWinrate();
+                break;
+            case R.id.order_by_wins_stat:
+                orderByWins();
+                break;
         }
         return super.onOptionsItemSelected(item);
 
     }
 
-    private void orderByPresence() {
-        if(PresencePlayersFragment.orderByPresenceInverse) {
-            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByPresence());
+    private void orderByWins() {
+
+        if(StatisticsFragment.orderByWinsInverse) {
+            Collections.sort(StatisticsFragment.players, new OrderByWins());
         }else{
-            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByPresenceInv());
+            Collections.sort(StatisticsFragment.players, new OrderByWinsInv());
 
         }
-        PresencePlayersFragment.orderByPresenceInverse=!PresencePlayersFragment.orderByPresenceInverse;
+        StatisticsFragment.orderByWinsInverse=!StatisticsFragment.orderByWinsInverse;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
+
+    }
+
+    private void orderByWinrate() {
+
+        if(StatisticsFragment.orderByWinrateInverse) {
+            Collections.sort(StatisticsFragment.players, new OrderByWinRate());
+        }else{
+            Collections.sort(StatisticsFragment.players, new OrderByWinRateInv());
+
+        }
+        StatisticsFragment.orderByWinrateInverse=!StatisticsFragment.orderByWinrateInverse;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
+    }
+
+    private void orderByGoals() {
+
+        if(StatisticsFragment.orderByGoalsInverse) {
+            Collections.sort(StatisticsFragment.players, new OrderByGoals());
+        }else{
+            Collections.sort(StatisticsFragment.players, new OrderByGoalsInv());
+
+        }
+        StatisticsFragment.orderByGoalsInverse=!StatisticsFragment.orderByGoalsInverse;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
+
+    }
+
+    private void orderByDefeats() {
+
+        if(StatisticsFragment.orderByDefeatsInverse) {
+            Collections.sort(StatisticsFragment.players, new OrderByDefeats());
+        }else{
+            Collections.sort(StatisticsFragment.players, new OrderByDefeatsInv());
+
+        }
+        StatisticsFragment.orderByDefeatsInverse=!StatisticsFragment.orderByDefeatsInverse;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
+    }
+
+    private void orderByNickStats() {
+        if(StatisticsFragment.orderByNickInverse) {
+            Collections.sort(StatisticsFragment.players, new OrderByNickStat());
+        }else{
+            Collections.sort(StatisticsFragment.players, new OrderByNickStatInv());
+
+        }
+        StatisticsFragment.orderByNickInverse=!StatisticsFragment.orderByNickInverse;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
+
+    }
+
+    private void orderByPresence() {
+        if(PresencePlayersFragment.orderByNickInverse) {
+            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNick());
+        }else{
+            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNickInv());
+
+        }
+        PresencePlayersFragment.orderByNickInverse=!PresencePlayersFragment.orderByNickInverse;
         PresencePlayersFragment.mAdapter.notifyDataSetChanged();
+
     }
 
     private void orderByNick() {
@@ -444,7 +529,6 @@ public class MainActivity extends AppCompatActivity {
         if (players == null) {
             Log.d("item", "nenhum item previamente cadastrado");
             players = new ArrayList<>();
-        }
 
         players=new ArrayList<>();
         players.add(new Players("1","Teste1","Teste1","Teste1","Teste1",0,0));
@@ -473,6 +557,8 @@ public class MainActivity extends AppCompatActivity {
         players.add(new Players("24","Teste24","Teste24","Teste24","Teste24",0,0));
         players.add(new Players("25","Teste25","Teste25","Teste25","Teste25",0,0));
         players.add(new Players("26","Teste26","Teste26","Teste26","Teste26",0,0));
+        }
+//
 
     }
 

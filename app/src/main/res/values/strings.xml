@@ -60,4 +60,15 @@
     <string name="goals">Goals:</string>
     <string name="loses">L.:</string>
     <string name="end_pelada">End Pelada</string>
+    <string name="order_by_defeats">Order By Defeats</string>
+    <string name="order_by_nick">Order By Nick</string>
+    <string name="order_by_goals">Order By Goals</string>
+    <string name="order_by_winrate">Order By Winrate</string>
+    <string name="order_by_wins">Order By Wins</string>
+    <string name="about_text">Este trabalho foi desenvolvido no decorer da disciplina CSIXXX- Computação Movel, no intuito de colocar em prática os conceitos teóricos aprendidos em sala de aula.</string>
+    <string name="exit">Exit</string>
+    <string name="login">Login</string>
+    <string name="please_insert_your_email">Please insert your email:</string>
+    <string name="welcome_to_the_app_pelada_manager">Welcome to the App Pelada Manager</string>
+    <string name="please_insert_your_name">Please insert your name:</string>
 </resources>
