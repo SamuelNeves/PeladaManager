@@ -20,12 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.amitshekhar.DebugDB;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.facebook.stetho.Stetho;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,8 +45,6 @@ import ufop.br.futmansamuel.sort.OrderByNick;
 import ufop.br.futmansamuel.sort.OrderByNickInv;
 import ufop.br.futmansamuel.sort.OrderByNickStat;
 import ufop.br.futmansamuel.sort.OrderByNickStatInv;
-import ufop.br.futmansamuel.sort.OrderByPresence;
-import ufop.br.futmansamuel.sort.OrderByPresenceInv;
 import ufop.br.futmansamuel.sort.OrderByWinRate;
 import ufop.br.futmansamuel.sort.OrderByWinRateInv;
 import ufop.br.futmansamuel.sort.OrderByWins;
@@ -283,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_LIST_PLAYERS;
                         break;
-                    case R.id.nav_notifications:
+                    case R.id.nav_stats:
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_STATISTICS;
                         break;

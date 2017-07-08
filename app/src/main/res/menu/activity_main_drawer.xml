@@ -16,9 +16,9 @@
             android:title="@string/nav_players" />
 
         <item
-            android:id="@+id/nav_notifications"
+            android:id="@+id/nav_stats"
             android:icon="@mipmap/ic_stats"
-            android:title="@string/nav_notifications" />
+            android:title="@string/statistics" />
 
         <item
             android:id="@+id/nav_settings"

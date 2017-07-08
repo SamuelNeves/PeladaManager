@@ -18,7 +18,7 @@
     <string name="last_name_player">Sobrenome:</string>
     <string name="lista_de_jogadores">Lista de Jogadores:</string>
     <string name="nav_about_us">Sobre</string>
-    <string name="nav_home"></string>
+    <string name="nav_home">Home</string>
     <string name="nav_players">Jogadores</string>
     <string name="nav_registrar_jogador">Registrar Jogador</string>
     <string name="nav_settings">Configurações</string>
@@ -35,7 +35,7 @@
     <string name="order_by_defeats">Ordernar por Derrotas</string>
     <string name="order_by_nick">Ordenar por Apeloido</string>
     <string name="order_by_winrate">Ordenar por Winrate</string>
-    <string name="about_text">Este trabalho foi desenvolvido no decorer da disciplina CSIXXX- Computação Movel, no intuito de colocar em prática os conceitos teóricos aprendidos em sala de aula.</string>
+    <string name="about_text">Este trabalho foi desenvolvido no decorer da disciplina CSI489- Computação Movel na Universidade Federal de Ouro Preto, no intuito de colocar em prática os conceitos teóricos aprendidos em sala de aula.</string>
     <string name="please_insert_your_email">Por favor insira o seu email:</string>
     <string name="welcome_to_the_app_pelada_manager">Bem vindo ao aplicativo Pelada Manager</string>
     <string name="please_insert_your_name">Por favor insira o seu nome:</string>
@@ -51,7 +51,6 @@
     <string name="end_pelada">Finalizar Pelada</string>
     <string name="exit">Sair</string>
     <string name="name">Nome</string>
-    <string name="nav_notifications">Estatisticas</string>
     <string name="openDrawer"></string>
     <string name="order_by_goals">Ordernar por Gols</string>
     <string name="order_by_wins">Ordenar por Vitorias</string>
@@ -63,4 +62,5 @@
     <string name="start_pelada">Começar Pelada</string>
     <string name="submit">Submeter</string>
     <string name="substitutes">Substitutos</string>
+    <string name="statistics">Estatisticas</string>
 </resources>

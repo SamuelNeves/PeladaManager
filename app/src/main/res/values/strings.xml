@@ -80,4 +80,5 @@
     <string name="winrate" translatable="false">Winrate:</string>
     <string name="tot_games">Tot. Games:</string>
     <string name="w" translatable="false">W.:</string>
+    <string name="statistics">Statistics</string>
 </resources>
