@@ -14,7 +14,7 @@ import ufop.br.futmansamuel.activities.MainActivity;
 
 
 public class HomeFragment extends Fragment {
-    Button btnStartPelada;
+    private Button btnStartPelada;
 
 
 

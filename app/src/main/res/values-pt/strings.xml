@@ -63,4 +63,7 @@
     <string name="submit">Submeter</string>
     <string name="substitutes">Substitutos</string>
     <string name="statistics">Estatisticas</string>
+    <string name="player_removed">Player Removed!</string>
+    <string name="team_completed">Time Completo</string>
+    <string name="add_player">Add Player</string>
 </resources>

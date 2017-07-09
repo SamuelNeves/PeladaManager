@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_pelada_add"
+        android:orderInCategory="100"
+        android:title="@string/add_player"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_pelada_end"
         android:orderInCategory="100"
         android:title="@string/end_pelada"

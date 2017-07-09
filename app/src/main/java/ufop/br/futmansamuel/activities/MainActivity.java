@@ -1,6 +1,8 @@
 package ufop.br.futmansamuel.activities;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,18 +10,25 @@ import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -36,6 +45,7 @@ import ufop.br.futmansamuel.R;
 import ufop.br.futmansamuel.other.CircleTransform;
 import ufop.br.futmansamuel.fragments.*;
 import ufop.br.futmansamuel.other.PeladaManager;
+import ufop.br.futmansamuel.other.PlayerInPelada;
 import ufop.br.futmansamuel.other.Players;
 import ufop.br.futmansamuel.sort.OrderByDefeats;
 import ufop.br.futmansamuel.sort.OrderByDefeatsInv;
@@ -59,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtName, txtEmail;
     private Toolbar toolbar;
     public static PeladaManager peladaManager;
+    AlertDialog.Builder aDMenu;
 
     // urls to load navigation header background image
     // and profile image
@@ -80,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_ADD_PLAYER = "addplayer";
     private static final String TAG_LIST_PLAYERS = "listplayer";
     private static final String TAG_STATISTICS = "statistics";
+    public static final String TAG_PELADA = "peladafrag";
     private static final String TAG_SETTINGS = "settings";
     public static String CURRENT_TAG = TAG_HOME;
 
@@ -100,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupSharedPreferences();
-        Log.d("firstRun", " "+sharedPreferences.getBoolean("firstRun", true) + "");
+        Log.d("firstRun", " " + sharedPreferences.getBoolean("firstRun", true) + "");
         if (sharedPreferences.getBoolean("firstRun", true)) {
             executeOnFirstRun();
         }
@@ -136,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         loadPlayersFromFile();
+
     }
 
     private void executeOnFirstRun() {
@@ -359,10 +372,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (actualFragment == STATE_CHECK_PRESENCE_FRAGMENT) {
             getMenuInflater().inflate(R.menu.order_menu, menu);
-            }
-            else if(actualFragment ==STATE_STATISTICS_FRAGMENT){
+        } else if (actualFragment == STATE_STATISTICS_FRAGMENT) {
             getMenuInflater().inflate(R.menu.menu_statistics_order, menu);
-
+        } else if (actualFragment == STATE_PELADA_FRAGMENT) {
+            getMenuInflater().inflate(R.menu.pelada_menu, menu);
         }
 
         return true;
@@ -397,93 +410,102 @@ public class MainActivity extends AppCompatActivity {
             case R.id.order_by_wins_stat:
                 orderByWins();
                 break;
+
+            case R.id.menu_pelada_add:
+                showDialogMenu();
+                break;
+            case R.id.menu_pelada_end:
+                PeladaFragment pl = (PeladaFragment) getSupportFragmentManager().findFragmentByTag(TAG_PELADA);
+                pl.endGame();
+                break;
         }
         return super.onOptionsItemSelected(item);
 
     }
 
+
     private void orderByWins() {
 
-        if(StatisticsFragment.orderByWinsInverse) {
+        if (StatisticsFragment.orderByWinsInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByWins());
-        }else{
+        } else {
             Collections.sort(StatisticsFragment.players, new OrderByWinsInv());
 
         }
-        StatisticsFragment.orderByWinsInverse=!StatisticsFragment.orderByWinsInverse;
+        StatisticsFragment.orderByWinsInverse = !StatisticsFragment.orderByWinsInverse;
         StatisticsFragment.mAdapter.notifyDataSetChanged();
 
     }
 
     private void orderByWinrate() {
 
-        if(StatisticsFragment.orderByWinrateInverse) {
+        if (StatisticsFragment.orderByWinrateInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByWinRate());
-        }else{
+        } else {
             Collections.sort(StatisticsFragment.players, new OrderByWinRateInv());
 
         }
-        StatisticsFragment.orderByWinrateInverse=!StatisticsFragment.orderByWinrateInverse;
+        StatisticsFragment.orderByWinrateInverse = !StatisticsFragment.orderByWinrateInverse;
         StatisticsFragment.mAdapter.notifyDataSetChanged();
     }
 
     private void orderByGoals() {
 
-        if(StatisticsFragment.orderByGoalsInverse) {
+        if (StatisticsFragment.orderByGoalsInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByGoals());
-        }else{
+        } else {
             Collections.sort(StatisticsFragment.players, new OrderByGoalsInv());
 
         }
-        StatisticsFragment.orderByGoalsInverse=!StatisticsFragment.orderByGoalsInverse;
+        StatisticsFragment.orderByGoalsInverse = !StatisticsFragment.orderByGoalsInverse;
         StatisticsFragment.mAdapter.notifyDataSetChanged();
 
     }
 
     private void orderByDefeats() {
 
-        if(StatisticsFragment.orderByDefeatsInverse) {
+        if (StatisticsFragment.orderByDefeatsInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByDefeats());
-        }else{
+        } else {
             Collections.sort(StatisticsFragment.players, new OrderByDefeatsInv());
 
         }
-        StatisticsFragment.orderByDefeatsInverse=!StatisticsFragment.orderByDefeatsInverse;
+        StatisticsFragment.orderByDefeatsInverse = !StatisticsFragment.orderByDefeatsInverse;
         StatisticsFragment.mAdapter.notifyDataSetChanged();
     }
 
     private void orderByNickStats() {
-        if(StatisticsFragment.orderByNickInverse) {
+        if (StatisticsFragment.orderByNickInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByNickStat());
-        }else{
+        } else {
             Collections.sort(StatisticsFragment.players, new OrderByNickStatInv());
 
         }
-        StatisticsFragment.orderByNickInverse=!StatisticsFragment.orderByNickInverse;
+        StatisticsFragment.orderByNickInverse = !StatisticsFragment.orderByNickInverse;
         StatisticsFragment.mAdapter.notifyDataSetChanged();
 
     }
 
     private void orderByPresence() {
-        if(PresencePlayersFragment.orderByNickInverse) {
+        if (PresencePlayersFragment.orderByNickInverse) {
             Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNick());
-        }else{
+        } else {
             Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNickInv());
 
         }
-        PresencePlayersFragment.orderByNickInverse=!PresencePlayersFragment.orderByNickInverse;
+        PresencePlayersFragment.orderByNickInverse = !PresencePlayersFragment.orderByNickInverse;
         PresencePlayersFragment.mAdapter.notifyDataSetChanged();
 
     }
 
     private void orderByNick() {
-        if(PresencePlayersFragment.orderByNickInverse) {
+        if (PresencePlayersFragment.orderByNickInverse) {
             Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNick());
-        }else{
+        } else {
             Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNickInv());
 
         }
-        PresencePlayersFragment.orderByNickInverse=!PresencePlayersFragment.orderByNickInverse;
+        PresencePlayersFragment.orderByNickInverse = !PresencePlayersFragment.orderByNickInverse;
         PresencePlayersFragment.mAdapter.notifyDataSetChanged();
     }
 
@@ -525,33 +547,33 @@ public class MainActivity extends AppCompatActivity {
             Log.d("item", "nenhum item previamente cadastrado");
             players = new ArrayList<>();
 
-        players=new ArrayList<>();
-        players.add(new Players("1","Teste1","Teste1","Teste1","Teste1",0,0));
-        players.add(new Players("2","Teste2","Teste2","Teste2","Teste2",0,0));
-        players.add(new Players("3","Teste3","Teste3","Teste3","Teste3",0,0));
-        players.add(new Players("4","Teste4","Teste4","Teste4","Teste4",0,0));
-        players.add(new Players("5","Teste5","Teste5","Teste5","Teste5",0,0));
-        players.add(new Players("6","Teste6","Teste6","Teste6","Teste6",0,0));
-        players.add(new Players("7","Teste7","Teste7","Teste7","Teste7",0,0));
-        players.add(new Players("8","Teste8","Teste8","Teste8","Teste8",0,0));
-        players.add(new Players("9","Teste9","Teste9","Teste9","Teste9",0,0));
-        players.add(new Players("10","Teste10","Teste10","Teste10","Teste10",0,0));
-        players.add(new Players("11","Teste11","Teste11","Teste11","Teste11",0,0));
-        players.add(new Players("12","Teste12","Teste12","Teste12","Teste12",0,0));
-        players.add(new Players("13","Teste13","Teste13","Teste13","Teste13",0,0));
-        players.add(new Players("14","Teste14","Teste14","Teste14","Teste14",0,0));
-        players.add(new Players("15","Teste15","Teste15","Teste15","Teste15",0,0));
-        players.add(new Players("16","Teste16","Teste16","Teste16","Teste16",0,0));
-        players.add(new Players("17","Teste17","Teste17","Teste17","Teste17",0,0));
-        players.add(new Players("18","Teste18","Teste18","Teste18","Teste18",0,0));
-        players.add(new Players("19","Teste19","Teste19","Teste19","Teste19",0,0));
-        players.add(new Players("20","Teste20","Teste20","Teste20","Teste20",0,0));
-        players.add(new Players("21","Teste21","Teste21","Teste21","Teste21",0,0));
-        players.add(new Players("22","Teste22","Teste22","Teste22","Teste22",0,0));
-        players.add(new Players("23","Teste23","Teste23","Teste23","Teste23",0,0));
-        players.add(new Players("24","Teste24","Teste24","Teste24","Teste24",0,0));
-        players.add(new Players("25","Teste25","Teste25","Teste25","Teste25",0,0));
-        players.add(new Players("26","Teste26","Teste26","Teste26","Teste26",0,0));
+            players = new ArrayList<>();
+            players.add(new Players("1", "Teste1", "Teste1", "Teste1", "Teste1", 0, 0));
+            players.add(new Players("2", "Teste2", "Teste2", "Teste2", "Teste2", 0, 0));
+            players.add(new Players("3", "Teste3", "Teste3", "Teste3", "Teste3", 0, 0));
+            players.add(new Players("4", "Teste4", "Teste4", "Teste4", "Teste4", 0, 0));
+            players.add(new Players("5", "Teste5", "Teste5", "Teste5", "Teste5", 0, 0));
+            players.add(new Players("6", "Teste6", "Teste6", "Teste6", "Teste6", 0, 0));
+            players.add(new Players("7", "Teste7", "Teste7", "Teste7", "Teste7", 0, 0));
+            players.add(new Players("8", "Teste8", "Teste8", "Teste8", "Teste8", 0, 0));
+            players.add(new Players("9", "Teste9", "Teste9", "Teste9", "Teste9", 0, 0));
+            players.add(new Players("10", "Teste10", "Teste10", "Teste10", "Teste10", 0, 0));
+            players.add(new Players("11", "Teste11", "Teste11", "Teste11", "Teste11", 0, 0));
+            players.add(new Players("12", "Teste12", "Teste12", "Teste12", "Teste12", 0, 0));
+            players.add(new Players("13", "Teste13", "Teste13", "Teste13", "Teste13", 0, 0));
+            players.add(new Players("14", "Teste14", "Teste14", "Teste14", "Teste14", 0, 0));
+            players.add(new Players("15", "Teste15", "Teste15", "Teste15", "Teste15", 0, 0));
+            players.add(new Players("16", "Teste16", "Teste16", "Teste16", "Teste16", 0, 0));
+            players.add(new Players("17", "Teste17", "Teste17", "Teste17", "Teste17", 0, 0));
+            players.add(new Players("18", "Teste18", "Teste18", "Teste18", "Teste18", 0, 0));
+            players.add(new Players("19", "Teste19", "Teste19", "Teste19", "Teste19", 0, 0));
+            players.add(new Players("20", "Teste20", "Teste20", "Teste20", "Teste20", 0, 0));
+            players.add(new Players("21", "Teste21", "Teste21", "Teste21", "Teste21", 0, 0));
+            players.add(new Players("22", "Teste22", "Teste22", "Teste22", "Teste22", 0, 0));
+            players.add(new Players("23", "Teste23", "Teste23", "Teste23", "Teste23", 0, 0));
+            players.add(new Players("24", "Teste24", "Teste24", "Teste24", "Teste24", 0, 0));
+            players.add(new Players("25", "Teste25", "Teste25", "Teste25", "Teste25", 0, 0));
+            players.add(new Players("26", "Teste26", "Teste26", "Teste26", "Teste26", 0, 0));
         }
 //
 
@@ -572,4 +594,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-}
+
+    private void showDialogMenu() {
+        final EditText input = new EditText(MainActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        aDMenu = new AlertDialog.Builder(this);
+
+        aDMenu.setView(input);
+        aDMenu.setMessage("Insert the nick of the player:");
+        aDMenu.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "" + input.getText(), Toast.LENGTH_SHORT).show();
+                PeladaFragment pf = (PeladaFragment) getSupportFragmentManager().findFragmentByTag(TAG_PELADA);
+                Players player = null;
+                for (Players p : MainActivity.players) {
+                    if (p.getNickName().equals(input.getText().toString())) {
+                        player = p;
+                        break;
+                    }
+                }
+                if (player != null) {
+                    pf.getPeladaManager().getPelada().getSubstitutes().getPlayers().add(new PlayerInPelada(player, true, 0));
+                    pf.getmAdapterSubs().notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Player Not Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        aDMenu.create();
+        aDMenu.show();
+    }
+
+    }

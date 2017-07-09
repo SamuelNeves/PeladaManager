@@ -63,7 +63,8 @@
     <string name="order_by_goals">Order By Goals</string>
     <string name="order_by_winrate">Order By Winrate</string>
     <string name="order_by_wins">Order By Wins</string>
-    <string name="about_text">Este trabalho foi desenvolvido no decorer da disciplina CSIXXX- Computação Movel, no intuito de colocar em prática os conceitos teóricos aprendidos em sala de aula.</string>
+    <string name="about_text">This App was developed  by the student Samuel Neves as a work for the CSI489- Mobile Computing class in the Federal
+    University of Ouro Preto.</string>
     <string name="exit">Exit</string>
     <string name="login" translatable="false">Login</string>
     <string name="please_insert_your_email">Please insert your email:</string>
@@ -81,4 +82,7 @@
     <string name="tot_games">Tot. Games:</string>
     <string name="w" translatable="false">W.:</string>
     <string name="statistics">Statistics</string>
+    <string name="player_removed">Player Removed!</string>
+    <string name="team_completed">Time Completo</string>
+    <string name="add_player">Add Player</string>
 </resources>

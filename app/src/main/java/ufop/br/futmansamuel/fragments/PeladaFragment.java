@@ -7,10 +7,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +29,9 @@ import ufop.br.futmansamuel.other.PeladaManager;
 import ufop.br.futmansamuel.other.PlayerInPelada;
 
 public class PeladaFragment extends Fragment {
-    String[] teste = {"Teste1", "Teste2", "Teste3", "Teste4", "Teste5", "Teste6", "Teste7"};
     private PlayersOfTeamInGameAdapter mAdapter1;
     private PlayersOfTeamInGameAdapter mAdapter2;
+
     private PlayersOfTeamInGameAdapter mAdapterSubs;
     RecyclerView lstTeamOne;
     RecyclerView lstTeamTwo;
@@ -40,6 +40,7 @@ public class PeladaFragment extends Fragment {
     Chronometer crono;
     Button btnStart, btnPause, btnReset;
     android.support.v7.app.AlertDialog aDMenu;
+
     PeladaManager peladaManager;
     MediaPlayer mp;
 
@@ -47,8 +48,8 @@ public class PeladaFragment extends Fragment {
     private long elapsedTime;
     private boolean isRunningChronometer = false;
     private boolean alarmElapsed = false;
-    final String[] itemMenuDialogTeam = {"Add Goal", "Substituir", "Remove"};
-    final String[] itemMenuDialogSubs = {"Add to Team 1", "Add to Team 2"};
+    final String[] itemMenuDialogTeam = {"Add Goal", "Replace", "Remove"};
+    final String[] itemMenuDialogSubs = {"Add to Team 1", "Add to Team 2", "Leave"};
 
     //    final String[] itemMenuDialog = {
 //            getActivity().getString(R.string.add_goal),  getActivity().getString(R.string.remove_player_team)};
@@ -252,7 +253,6 @@ public class PeladaFragment extends Fragment {
 
     private void substituirPlayer(int team, int positionOfSelectedItem) {
         PlayerInPelada p;
-
         if (team == 1) {
             p = peladaManager.getPelada().getTeam1().getPlayers().remove(positionOfSelectedItem);
             peladaManager.getPelada().getSubstitutes().getPlayers().add(p);
@@ -277,7 +277,7 @@ public class PeladaFragment extends Fragment {
                         switch (position) {
                             case 0:
                                 if (peladaManager.isTeam1Full()) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "Time Completo", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), R.string.team_completed, Toast.LENGTH_SHORT).show();
                                 } else {
                                     PlayerInPelada p = peladaManager.getPelada().getSubstitutes().getPlayers().remove(positionOfSelectedItem);
                                     peladaManager.getPelada().getTeam1().getPlayers().add(p);
@@ -287,7 +287,7 @@ public class PeladaFragment extends Fragment {
                                 break;
                             case 1:
                                 if (peladaManager.isTeam2Full()) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "Time Completo", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), R.string.team_completed, Toast.LENGTH_SHORT).show();
                                 } else {
                                     PlayerInPelada p = peladaManager.getPelada().getSubstitutes().getPlayers().remove(positionOfSelectedItem);
                                     peladaManager.getPelada().getTeam2().getPlayers().add(p);
@@ -296,6 +296,12 @@ public class PeladaFragment extends Fragment {
 
                                 }
 
+                                break;
+
+                            case 2:
+                                peladaManager.getPelada().getSubstitutes().getPlayers().remove(positionOfSelectedItem);
+                                mAdapterSubs.notifyItemRemoved(positionOfSelectedItem);
+                                Toast.makeText(getActivity().getApplicationContext(), R.string.player_removed, Toast.LENGTH_SHORT).show();
                                 break;
 
                         }
@@ -342,7 +348,8 @@ public class PeladaFragment extends Fragment {
     }
 
 
-    private void endGame() {
+    public void endGame() {
+
         if (peladaManager.getPelada().getTeam1().getNumberOfGoals() > peladaManager.getPelada().getTeam2().getNumberOfGoals()) {
             winnerTeam = 1;
         } else {
@@ -381,10 +388,24 @@ public class PeladaFragment extends Fragment {
                         MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
                                 peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
                         PeladaFragment f = new PeladaFragment();
-                        MainActivity.transitionToNewFragment(f, getActivity());
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                                android.R.anim.fade_out);
+                        fragmentTransaction.replace(R.id.frame, f, MainActivity.TAG_PELADA);
+                        fragmentTransaction.commitAllowingStateLoss();
                     }
                 })
                 .create();
         alertDialog.show();
     }
+
+
+    public PlayersOfTeamInGameAdapter getmAdapterSubs() {
+        return mAdapterSubs;
+    }
+
+    public PeladaManager getPeladaManager() {
+        return peladaManager;
+    }
+
 }

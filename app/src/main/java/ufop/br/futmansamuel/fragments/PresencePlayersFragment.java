@@ -64,7 +64,7 @@ public class PresencePlayersFragment extends Fragment {
                 PeladaFragment fragment = new PeladaFragment();
                 fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
                         android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment);
+                fragmentTransaction.replace(R.id.frame, fragment,MainActivity.TAG_PELADA);
                 fragmentTransaction.commitAllowingStateLoss();
 
             }

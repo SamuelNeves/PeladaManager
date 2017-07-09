@@ -22,8 +22,14 @@ import android.widget.Toast;
 
 
 public class AddPlayerFragment extends Fragment {
-    Button btnSubmit, btnCancel;
-    EditText txtId, txtFirstName, txtLastName, txtNick, txtEmail, txtPhone;
+    private Button btnSubmit;
+    private Button btnCancel;
+    private EditText txtId;
+    EditText txtFirstName;
+    private EditText txtLastName;
+    EditText txtNick;
+    EditText txtEmail;
+    EditText txtPhone;
     TextInputLayout tilId, tilFirstN, tilLastN, tilNick, tilEmail, tilPhone;
 
     @Override

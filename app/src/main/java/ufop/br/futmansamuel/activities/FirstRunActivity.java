@@ -14,9 +14,10 @@ import ufop.br.futmansamuel.R;
 
 public class FirstRunActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor sharedPrefEditor;
-    EditText txtName,txtEmail;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor sharedPrefEditor;
+    private EditText txtName;
+    private EditText txtEmail;
 
 
     private void initComponents(){
