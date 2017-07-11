@@ -10,7 +10,7 @@
 <dimen name="profile_width">75dp</dimen>
 <dimen name="profile_height">75dp</dimen>
 <dimen name="textForms">20sp</dimen>
-<dimen name="textListPresenceChecker">30sp</dimen>
+<dimen name="textListPresenceChecker">25sp</dimen>
 <dimen name="textSizeOfNickInTeam">25sp</dimen>
 <dimen name="titleForms">28sp</dimen>
 <dimen name="leftMarginForms">16dp</dimen>

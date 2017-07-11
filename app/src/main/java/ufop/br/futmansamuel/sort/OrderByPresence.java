@@ -11,9 +11,14 @@ import ufop.br.futmansamuel.other.Players;
  */
 
 public class OrderByPresence implements Comparator<PlayerInPelada> {
+    private int getInt(PlayerInPelada o) {
+        if (o.isPresentInPelada())
+            return 0;
+        else return 1;
+    }
 
     @Override
-    public int compare(PlayerInPelada o1, PlayerInPelada o2) {
-        return o1.getNumberOfGoals()-o2.getNumberOfGoals();
+    public int compare(PlayerInPelada o2, PlayerInPelada o1) {
+        return getInt(o1) - getInt(o2);
     }
 }

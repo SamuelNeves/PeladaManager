@@ -67,7 +67,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 durationOfPelada = (position + minDuration) * 60000;
-                Toast.makeText(getActivity().getApplicationContext(), "" + durationOfPelada, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "" + durationOfPelada, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -80,7 +80,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 numberOfPlayers = position + minNumberOfPlayers;
-                Toast.makeText(getActivity().getApplicationContext(), "" + numberOfPlayers, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "" + numberOfPlayers, Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -130,12 +130,12 @@ public class EditPlayerFragment extends Fragment {
     private void submitForm() {
         Log.d("Here", "here");
 
-        if (!Validator.validadeID(txtId.getText().toString())) {
-            tilId.setError("Invalid Id");
-            return;
-        } else {
-            tilId.setErrorEnabled(false);
-        }
+//        if (!Validator.validadeID(txtId.getText().toString())) {
+//            tilId.setError("Invalid Id");
+//            return;
+//        } else {
+//            tilId.setErrorEnabled(false);
+//        }
         if (!Validator.validateFirstName(txtFirstName.getText().toString())) {
             tilFirstN.setError("Please insert your first name");
             return;

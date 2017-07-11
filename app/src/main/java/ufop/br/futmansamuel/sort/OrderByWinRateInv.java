@@ -12,6 +12,19 @@ import ufop.br.futmansamuel.other.Players;
 public class OrderByWinRateInv implements Comparator<Players> {
     @Override
     public int compare(Players o2, Players o1) {
-        return o1.getNumberOfWins()/o1.getTotalOfGames()-o2.getNumberOfWins()/o2.getTotalOfGames();
+        int winrateo1, winrateo2;
+        if (o1.getTotalOfGames() != 0) {
+
+            winrateo1 = o1.getNumberOfWins() / o1.getTotalOfGames();
+        } else {
+            winrateo1 = 0;
+        }
+        if (o2.getTotalOfGames() != 0) {
+            winrateo2 = o2.getNumberOfWins() / o2.getTotalOfGames();
+
+        } else {
+            winrateo2 = 0;
+        }
+        return winrateo1 - winrateo2;
     }
 }

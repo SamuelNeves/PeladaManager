@@ -55,6 +55,8 @@ import ufop.br.futmansamuel.sort.OrderByNick;
 import ufop.br.futmansamuel.sort.OrderByNickInv;
 import ufop.br.futmansamuel.sort.OrderByNickStat;
 import ufop.br.futmansamuel.sort.OrderByNickStatInv;
+import ufop.br.futmansamuel.sort.OrderByPresence;
+import ufop.br.futmansamuel.sort.OrderByPresenceInv;
 import ufop.br.futmansamuel.sort.OrderByWinRate;
 import ufop.br.futmansamuel.sort.OrderByWinRateInv;
 import ufop.br.futmansamuel.sort.OrderByWins;
@@ -487,13 +489,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void orderByPresence() {
-        if (PresencePlayersFragment.orderByNickInverse) {
-            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNick());
+        if (PresencePlayersFragment.orderByPresenceInverse) {
+            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByPresence());
         } else {
-            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByNickInv());
+            Collections.sort(PresencePlayersFragment.playersInPeladaList, new OrderByPresenceInv());
 
         }
-        PresencePlayersFragment.orderByNickInverse = !PresencePlayersFragment.orderByNickInverse;
+        PresencePlayersFragment.orderByPresenceInverse = !PresencePlayersFragment.orderByPresenceInverse;
         PresencePlayersFragment.mAdapter.notifyDataSetChanged();
 
     }

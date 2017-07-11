@@ -349,13 +349,18 @@ public class PeladaFragment extends Fragment {
 
 
     public void endGame() {
-
+        if(aDMenu!=null)
+            aDMenu.dismiss();
         if (peladaManager.getPelada().getTeam1().getNumberOfGoals() > peladaManager.getPelada().getTeam2().getNumberOfGoals()) {
             winnerTeam = 1;
-        } else {
+            showEndDialog();
+        } else if (peladaManager.getPelada().getTeam1().getNumberOfGoals() < peladaManager.getPelada().getTeam2().getNumberOfGoals()) {
             winnerTeam = 2;
+            showEndDialog();
+        } else {
+            winnerTeam = 0;
+            showDrawDialog();
         }
-        showEndDialog();
 
     }
 
@@ -384,6 +389,42 @@ public class PeladaFragment extends Fragment {
                         } else if (winnerTeam == 2) {
                             winnerTeam = 1;
                         }
+                        peladaManager.endPelada(winnerTeam);
+                        MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
+                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                        PeladaFragment f = new PeladaFragment();
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                                android.R.anim.fade_out);
+                        fragmentTransaction.replace(R.id.frame, f, MainActivity.TAG_PELADA);
+                        fragmentTransaction.commitAllowingStateLoss();
+                    }
+                })
+                .create();
+        alertDialog.show();
+    }
+
+    private void showDrawDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Gol de Ouro")
+                .setMessage("Hum... Parece que ouve um empate. Utilize a regra Gol de Ouro para determinar o vencedor:")
+                .setPositiveButton("Team 2",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                winnerTeam=2;
+                                peladaManager.endPelada(winnerTeam);
+                                MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
+                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                PeladaFragment f = new PeladaFragment();
+                                MainActivity.transitionToNewFragment(f, getActivity());
+                            }
+
+                        })
+                .setNegativeButton("Team 1", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                            winnerTeam = 1;
                         peladaManager.endPelada(winnerTeam);
                         MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
                                 peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
