@@ -181,6 +181,7 @@ public class PeladaFragment extends Fragment {
                 }
                 btnPause.setEnabled(true);
                 btnStart.setEnabled(false);
+                btnReset.setEnabled(true);
 
             }
         });
@@ -191,7 +192,14 @@ public class PeladaFragment extends Fragment {
 
             }
         });
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crono.setBase(SystemClock.elapsedRealtime());
+                elapsedTime = 0;
 
+            }
+        });
     }
 
     private void refreshMenu() {
@@ -203,9 +211,9 @@ public class PeladaFragment extends Fragment {
         if (team == 1) {
             peladaManager.getPelada().getTeam1().addGoal();
             peladaManager.getPelada().getTeam1().getPlayers().get(position).addGoal();
-            Toast.makeText(getActivity().getApplicationContext(), "" +
-                    peladaManager.getPelada().getTeam1().getPlayers().get(position).getNumberOfGoalsInGame()
-                    + peladaManager.getPelada().getTeam1().getPlayers().get(position).getNickName(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity().getApplicationContext(), "" +
+//                    peladaManager.getPelada().getTeam1().getPlayers().get(position).getNumberOfGoalsInGame()
+//                    + peladaManager.getPelada().getTeam1().getPlayers().get(position).getNickName(), Toast.LENGTH_SHORT).show();
         } else {
             peladaManager.getPelada().getTeam2().addGoal();
             peladaManager.getPelada().getTeam2().getPlayers().get(position).addGoal();
@@ -349,7 +357,7 @@ public class PeladaFragment extends Fragment {
 
 
     public void endGame() {
-        if(aDMenu!=null)
+        if (aDMenu != null)
             aDMenu.dismiss();
         if (peladaManager.getPelada().getTeam1().getNumberOfGoals() > peladaManager.getPelada().getTeam2().getNumberOfGoals()) {
             winnerTeam = 1;
@@ -375,9 +383,13 @@ public class PeladaFragment extends Fragment {
 
                                 peladaManager.endPelada(winnerTeam);
                                 MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
-                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes(), winnerTeam);
                                 PeladaFragment f = new PeladaFragment();
-                                MainActivity.transitionToNewFragment(f, getActivity());
+                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                                        android.R.anim.fade_out);
+                                fragmentTransaction.replace(R.id.frame, f, MainActivity.TAG_PELADA);
+                                fragmentTransaction.commitAllowingStateLoss();
                             }
 
                         })
@@ -391,7 +403,7 @@ public class PeladaFragment extends Fragment {
                         }
                         peladaManager.endPelada(winnerTeam);
                         MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
-                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes(), winnerTeam);
                         PeladaFragment f = new PeladaFragment();
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
@@ -412,22 +424,26 @@ public class PeladaFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
-                                winnerTeam=2;
+                                winnerTeam = 2;
                                 peladaManager.endPelada(winnerTeam);
                                 MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
-                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                        peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes(), winnerTeam);
                                 PeladaFragment f = new PeladaFragment();
-                                MainActivity.transitionToNewFragment(f, getActivity());
+                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                                        android.R.anim.fade_out);
+                                fragmentTransaction.replace(R.id.frame, f, MainActivity.TAG_PELADA);
+                                fragmentTransaction.commitAllowingStateLoss();
                             }
 
                         })
                 .setNegativeButton("Team 1", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            winnerTeam = 1;
+                        winnerTeam = 1;
                         peladaManager.endPelada(winnerTeam);
                         MainActivity.peladaManager = new PeladaManager(getActivity().getApplicationContext(),
-                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes());
+                                peladaManager.getPelada().getTeam1(), peladaManager.getPelada().getTeam2(), peladaManager.getPelada().getSubstitutes(), winnerTeam);
                         PeladaFragment f = new PeladaFragment();
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,

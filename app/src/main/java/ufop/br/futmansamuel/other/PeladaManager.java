@@ -39,47 +39,50 @@ public class PeladaManager {
         sortTeams();
 
     }
-    public boolean isTeam1Full(){
-        return (pelada.getTeam1().getPlayers().size()==maxPlayersByTeam);
-    }
-    public boolean isTeam2Full(){
-        return (pelada.getTeam2().getPlayers().size()==maxPlayersByTeam);
+
+    public boolean isTeam1Full() {
+        return (pelada.getTeam1().getPlayers().size() == maxPlayersByTeam);
     }
 
-    public PeladaManager(Context context, Team t1, Team t2, Team subs) {
+    public boolean isTeam2Full() {
+        return (pelada.getTeam2().getPlayers().size() == maxPlayersByTeam);
+    }
+
+    public PeladaManager(Context context, Team t1, Team t2, Team subs, int winnerTeam) {
         this.context = context;
         configSharedPreferences();
         loadPeladaConfigurations();
-        arrangeTeams(t1, t2, subs);
+        arrangeTeams(t1, t2, subs, winnerTeam);
     }
 
-    public void arrangeTeams(Team t1, Team t2, Team subs) {
+    public void arrangeTeams(Team t1, Team t2, Team subs, int winnerTeam) {
         Team newTeamOne = new Team();
         Team newTeamTwo = new Team();
         Team newSubstitutes = new Team();
-        ArrayList<PlayerInPelada> otherPlayers = new ArrayList<PlayerInPelada>();
-        otherPlayers.addAll(t1.getPlayers());
-        otherPlayers.addAll(t2.getPlayers());
-        Collections.shuffle(newSubstitutes.getPlayers());
-        Collections.shuffle(otherPlayers);
-        for (int i = 0; i < maxPlayersByTeam; i++) {
-            if (subs.getPlayers().size() > 1) {
-                newTeamOne.getPlayers().add(subs.getPlayers().remove(0));
-                newTeamTwo.getPlayers().add(subs.getPlayers().remove(0));
+        newSubstitutes.getPlayers().addAll(subs.getPlayers());
+
+        if (winnerTeam == 1) {
+            newTeamOne.setPlayers(t1.getPlayers());
+            newSubstitutes.getPlayers().addAll(t2.getPlayers());
+            for (int i = 0; i < maxPlayersByTeam; i++) {
+                if (newSubstitutes.getPlayers().size() > 0) {
+                    newTeamTwo.getPlayers().add(newSubstitutes.getPlayers().remove(0));
+                }
             }
-        }
-        while (subs.getPlayers().size() > 0) {
-            otherPlayers.add(0, subs.getPlayers().remove(0));
+        } else {
+            newTeamTwo.setPlayers(t2.getPlayers());
+            newSubstitutes.getPlayers().addAll(t1.getPlayers());
+            for (int i = 0; i < maxPlayersByTeam; i++) {
+                if (newSubstitutes.getPlayers().size() > 0) {
+                    newTeamOne.getPlayers().add(newSubstitutes.getPlayers().remove(0));
+                }
+            }
+
+
         }
 
-        for (int i = newTeamOne.getPlayers().size(); i <= maxPlayersByTeam; i++) {
-            if (otherPlayers.size() > 1) {
-                newTeamOne.getPlayers().add(otherPlayers.remove(0));
-                newTeamTwo.getPlayers().add(otherPlayers.remove(0));
-            }
-        }
-        newSubstitutes.setPlayers(otherPlayers);
-        pelada= new Pelada(newTeamOne,newTeamTwo,newSubstitutes,new Date());
+
+        pelada = new Pelada(newTeamOne, newTeamTwo, newSubstitutes, new Date());
 
     }
 
