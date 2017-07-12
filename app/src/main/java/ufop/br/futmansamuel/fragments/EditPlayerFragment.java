@@ -137,40 +137,40 @@ public class EditPlayerFragment extends Fragment {
 //            tilId.setErrorEnabled(false);
 //        }
         if (!Validator.validateFirstName(txtFirstName.getText().toString())) {
-            tilFirstN.setError("Please insert your first name");
+            tilFirstN.setError(getString(R.string.error_first_name));
             return;
         } else {
             tilFirstN.setErrorEnabled(false);
         }
         if (!Validator.validateLastName(txtLastName.getText().toString())) {
-            tilLastN.setError("Please insert your  last name");
+            tilLastN.setError(getString(R.string.error_last_name));
             return;
 
         } else {
             tilLastN.setErrorEnabled(false);
         }
         if (!Validator.validateNickName(txtNick.getText().toString())) {
-            tilNick.setError("Please insert your nick");
+            tilNick.setError(getString(R.string.error_nick_name));
             return;
         } else {
             tilNick.setErrorEnabled(false);
         }
 
         if (!Validator.validateEmail(txtEmail.getText().toString())) {
-            tilEmail.setError("Invalid Email");
+            tilEmail.setError(getString(R.string.error_invalid_email));
             return;
         } else {
             tilEmail.setErrorEnabled(false);
         }
 
         if (!Validator.validateTelephone(txtPhone.getText().toString())) {
-            tilPhone.setError("Invalid Phone");
+            tilPhone.setError(getString(R.string.error_phone));
             return;
         } else {
             tilPhone.setErrorEnabled(false);
         }
 
-        Toast.makeText(getActivity().getApplicationContext(), "Player  Edited!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(), R.string.player_edited, Toast.LENGTH_SHORT).show();
         updatePlayerFromScreenElements();
         goToListPlayersFragment();
     }

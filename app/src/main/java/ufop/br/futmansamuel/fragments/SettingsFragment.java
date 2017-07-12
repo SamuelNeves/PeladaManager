@@ -51,7 +51,6 @@ public class SettingsFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                TODO implement onclick Cancel
             }
         });
 
@@ -95,7 +94,7 @@ private void saveOnSharedPreferences(){
     sharedPrefEditor.putLong("duration",durationOfPelada);
     sharedPrefEditor.putInt("number_players_team",numberOfPlayers);
     sharedPrefEditor.commit();
-    Toast.makeText(getActivity().getApplicationContext(), "Settings Saved!", Toast.LENGTH_SHORT).show();
+    Toast.makeText(getActivity().getApplicationContext(), R.string.saved_settings, Toast.LENGTH_SHORT).show();
 }
     private void configSharedPreferences() {
         sharedPreferences = getActivity().getSharedPreferences(PeladaManager.PELADASETTINGSPREFSNAME,

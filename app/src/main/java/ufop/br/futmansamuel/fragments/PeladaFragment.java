@@ -48,8 +48,8 @@ public class PeladaFragment extends Fragment {
     private long elapsedTime;
     private boolean isRunningChronometer = false;
     private boolean alarmElapsed = false;
-    final String[] itemMenuDialogTeam = {"Add Goal", "Replace", "Remove"};
-    final String[] itemMenuDialogSubs = {"Add to Team 1", "Add to Team 2", "Leave"};
+    final String[] itemMenuDialogTeam = {getString(R.string.addGoal), getString(R.string.replace), getString(R.string.remove)};
+    final String[] itemMenuDialogSubs = {getString(R.string.add_to_team1), getString(R.string.add_to_team2), getString(R.string.leave)};
 
     //    final String[] itemMenuDialog = {
 //            getActivity().getString(R.string.add_goal),  getActivity().getString(R.string.remove_player_team)};
@@ -177,7 +177,7 @@ public class PeladaFragment extends Fragment {
                     crono.start();
                     isRunningChronometer = true;
                 } else {
-                    crono.setText("Start");
+                    crono.setText(R.string.start1);
                 }
                 btnPause.setEnabled(true);
                 btnStart.setEnabled(false);
@@ -256,6 +256,7 @@ public class PeladaFragment extends Fragment {
 //        wmlp.gravity = Gravity.TOP;
         wmlp.y = (int) v.getY();
         wmlp.x = (int) v.getX();
+        aDMenu.setCanceledOnTouchOutside(false);
         aDMenu.show();
     }
 
@@ -322,6 +323,8 @@ public class PeladaFragment extends Fragment {
         WindowManager.LayoutParams wmlp = aDMenu.getWindow().getAttributes();
 //        wmlp.gravity = Gravity.TOP;
 //        wmlp.horizontalWeight=30;
+
+        aDMenu.setCanceledOnTouchOutside(false);
         wmlp.y = (int) v.getY();
         wmlp.x = (int) v.getX();
         aDMenu.show();
@@ -330,7 +333,7 @@ public class PeladaFragment extends Fragment {
     private void pauseChronometer() {
         if (isRunningChronometer) {
             btnStart.setEnabled(true);
-            btnStart.setText("Continue");
+            btnStart.setText(R.string.continue1);
             crono.stop();
             btnStart.setEnabled(true);
             btnPause.setEnabled(false);
@@ -375,8 +378,8 @@ public class PeladaFragment extends Fragment {
     private void showEndDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
 //                .setTitle("End Pelada")
-                .setMessage("O time Vencedor foi o time " + winnerTeam + "?")
-                .setPositiveButton("Yes",
+                .setMessage(getString(R.string.winner_team_question) + winnerTeam + "?")
+                .setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -393,7 +396,7 @@ public class PeladaFragment extends Fragment {
                             }
 
                         })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (winnerTeam == 1) {
@@ -413,14 +416,15 @@ public class PeladaFragment extends Fragment {
                     }
                 })
                 .create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 
     private void showDrawDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Gol de Ouro")
-                .setMessage("Hum... Parece que ouve um empate. Utilize a regra Gol de Ouro para determinar o vencedor:")
-                .setPositiveButton("Team 2",
+                .setTitle(R.string.gold_goal)
+                .setMessage(R.string.draw_game_msg)
+                .setPositiveButton(R.string.team2,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -437,7 +441,7 @@ public class PeladaFragment extends Fragment {
                             }
 
                         })
-                .setNegativeButton("Team 1", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.team1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         winnerTeam = 1;
@@ -453,6 +457,7 @@ public class PeladaFragment extends Fragment {
                     }
                 })
                 .create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 

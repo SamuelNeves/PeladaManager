@@ -94,7 +94,7 @@ public class ListPlayersFragment extends Fragment {
 
                         }
                         String item = itemMenuDialog[position];
-                        Toast.makeText(getActivity().getApplicationContext(), "" + item, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity().getApplicationContext(), "" + item, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .create();

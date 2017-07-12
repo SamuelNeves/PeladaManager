@@ -607,7 +607,7 @@ public class MainActivity extends AppCompatActivity {
 
         aDMenu.setView(input);
         aDMenu.setMessage("Insert the nick of the player:");
-        aDMenu.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+        aDMenu.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "" + input.getText(), Toast.LENGTH_SHORT).show();
@@ -623,7 +623,7 @@ public class MainActivity extends AppCompatActivity {
                     pf.getPeladaManager().getPelada().getSubstitutes().getPlayers().add(new PlayerInPelada(player, true, 0));
                     pf.getmAdapterSubs().notifyDataSetChanged();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Player Not Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.player_not_found, Toast.LENGTH_SHORT).show();
                 }
             }
         });

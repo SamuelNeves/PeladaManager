@@ -66,4 +66,15 @@
     <string name="player_removed">Player Removed!</string>
     <string name="team_completed">Time Completo</string>
     <string name="add_player">Add Player</string>
+    <string name="team1">Team 1</string>
+    <string name="team2">Team 2</string>
+    <string name="draw_game_msg">Hum... Parece que ouve um empate. Utilize a regra Gol de Ouro para determinar o vencedor:</string>
+    <string name="gold_goal">Gol de Ouro</string>
+    <string name="yes">Yes</string>
+    <string name="winner_team_question">O time Vencedor foi o time</string>
+    <string name="addGoal">Add Goal</string>
+    <string name="leave">Leave</string>
+    <string name="start1">Start</string>
+    <string name="continue">Continue</string>
+    <string name="error_phone">Invalid Phone</string>
 </resources>
