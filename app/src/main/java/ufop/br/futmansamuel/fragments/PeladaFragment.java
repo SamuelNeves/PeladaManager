@@ -48,8 +48,8 @@ public class PeladaFragment extends Fragment {
     private long elapsedTime;
     private boolean isRunningChronometer = false;
     private boolean alarmElapsed = false;
-    final String[] itemMenuDialogTeam = {getString(R.string.addGoal), getString(R.string.replace), getString(R.string.remove)};
-    final String[] itemMenuDialogSubs = {getString(R.string.add_to_team1), getString(R.string.add_to_team2), getString(R.string.leave)};
+    final String[] itemMenuDialogTeam = {"Add Goal", "Replace","Swap"};
+    final String[] itemMenuDialogSubs = {"Add to Team 1", "Add to Team 2", "Leave"};
 
     //    final String[] itemMenuDialog = {
 //            getActivity().getString(R.string.add_goal),  getActivity().getString(R.string.remove_player_team)};
@@ -256,7 +256,7 @@ public class PeladaFragment extends Fragment {
 //        wmlp.gravity = Gravity.TOP;
         wmlp.y = (int) v.getY();
         wmlp.x = (int) v.getX();
-        aDMenu.setCanceledOnTouchOutside(false);
+//        aDMenu.setCanceledOnTouchOutside(false);
         aDMenu.show();
     }
 
@@ -324,7 +324,7 @@ public class PeladaFragment extends Fragment {
 //        wmlp.gravity = Gravity.TOP;
 //        wmlp.horizontalWeight=30;
 
-        aDMenu.setCanceledOnTouchOutside(false);
+//        aDMenu.setCanceledOnTouchOutside(false);
         wmlp.y = (int) v.getY();
         wmlp.x = (int) v.getX();
         aDMenu.show();

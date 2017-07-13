@@ -14,7 +14,10 @@
         android:id="@+id/order_by_nick_stat"
         android:title="@string/order_by_nick"
         support:showAsAction="never"/>
-
+    <item
+        android:id="@+id/order_by_total_games"
+        android:title="@string/order_by_total_of_games"
+        support:showAsAction="never"/>
     <item
         android:id="@+id/order_by_winrate_stat"
         android:title="@string/order_by_winrate"

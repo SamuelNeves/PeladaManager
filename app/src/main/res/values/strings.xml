@@ -99,7 +99,6 @@
     <string name="add_to_team2">Add to Team 2</string>
     <string name="leave">Leave</string>
     <string name="start1">Start</string>
-    <string name="continue">Continue</string>
     <string name="continue1">Continue</string>
     <string name="confirm">Confirmar</string>
     <string name="player_not_found">Player Not Found</string>
@@ -110,4 +109,5 @@
     <string name="error_invalid_email">Invalid Email</string>
     <string name="error_phone">Invalid Phone</string>
     <string name="player_edited">Player  Edited!</string>
+    <string name="order_by_total_of_games">Order By Total of Games</string>
 </resources>

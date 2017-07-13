@@ -57,6 +57,8 @@ import ufop.br.futmansamuel.sort.OrderByNickStat;
 import ufop.br.futmansamuel.sort.OrderByNickStatInv;
 import ufop.br.futmansamuel.sort.OrderByPresence;
 import ufop.br.futmansamuel.sort.OrderByPresenceInv;
+import ufop.br.futmansamuel.sort.OrderByTotalGames;
+import ufop.br.futmansamuel.sort.OrderByTotalGamesInv;
 import ufop.br.futmansamuel.sort.OrderByWinRate;
 import ufop.br.futmansamuel.sort.OrderByWinRateInv;
 import ufop.br.futmansamuel.sort.OrderByWins;
@@ -412,7 +414,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.order_by_wins_stat:
                 orderByWins();
                 break;
-
+            case R.id.order_by_total_games:
+                orderByTotalGames();
+                break;
             case R.id.menu_pelada_add:
                 showDialogMenu();
                 break;
@@ -422,6 +426,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+
+    }
+
+    private void orderByTotalGames() {
+        if (StatisticsFragment.orderByTotalOfGamesInv) {
+            Collections.sort(StatisticsFragment.players, new OrderByTotalGames());
+        } else {
+            Collections.sort(StatisticsFragment.players, new OrderByTotalGamesInv());
+
+        }
+        StatisticsFragment.orderByTotalOfGamesInv = !StatisticsFragment.orderByTotalOfGamesInv;
+        StatisticsFragment.mAdapter.notifyDataSetChanged();
 
     }
 
@@ -440,7 +456,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void orderByWinrate() {
-
         if (StatisticsFragment.orderByWinrateInverse) {
             Collections.sort(StatisticsFragment.players, new OrderByWinRate());
         } else {

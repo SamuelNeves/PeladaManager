@@ -33,6 +33,7 @@ public class StatisticsFragment extends Fragment {
     public static boolean orderByNickInverse = false;
     public static boolean orderByWinsInverse = false;
     public static boolean orderByWinrateInverse = false;
+    public static boolean orderByTotalOfGamesInv = false;
 
     private void refreshMenu() {
         MainActivity.actualFragment = MainActivity.STATE_STATISTICS_FRAGMENT;

@@ -66,7 +66,13 @@ public class Players implements Serializable{
     private String phone;
     private int numberOfWins;
     private int numberOfDefeats;
-
+    public float getWinRateFloat(){
+        if(getTotalOfGames()==0){
+            return -1;
+        }else{
+            return numberOfWins/getTotalOfGames();
+        }
+    }
     public String getWinRate() {
         try {
             return String.valueOf(numberOfWins * 100 / getTotalOfGames()) + "%";

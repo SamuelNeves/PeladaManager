@@ -9,9 +9,9 @@ import ufop.br.futmansamuel.other.Players;
  *         Created on 07/07/17.
  */
 
-public class OrderByWinRateInv implements Comparator<Players> {
+public class OrderByTotalGamesInv implements Comparator<Players> {
     @Override
     public int compare(Players o2, Players o1) {
-
-        return (int)(o1.getWinRateFloat()-o2.getWinRateFloat());    }
+        return o1.getTotalOfGames()-o2.getTotalOfGames();
+    }
 }

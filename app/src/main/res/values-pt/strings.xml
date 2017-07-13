@@ -75,6 +75,6 @@
     <string name="addGoal">Add Goal</string>
     <string name="leave">Leave</string>
     <string name="start1">Start</string>
-    <string name="continue">Continue</string>
     <string name="error_phone">Invalid Phone</string>
+    <string name="order_by_total_of_games">Order By Total of Games</string>
 </resources>
